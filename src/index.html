@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>きらファンCard Maker - KiraFan Wiki</title>
+    <script src="./libs/jquery.min.js"></script>
+    <script src="./libs/pixi.min.js"></script>
+    <script src="./libs/pixi-layers.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
+    <base target="_blank">
+    <link rel="icon" href="https://kirafan.bangbang93.com/static/assets/texture/charauiresource/charaicon/charaicon_14032001.jpeg"
+        type="image/x-icon">
+</head>
+
+<body>
+    <div id="choiceHolder">
+        <div id="niseForm">
+            <span id="fontLoader">FontLoader</span>
+            <label for="file" id="fileLabel">Select Image File</label>
+            <input type="file" name="file" id="file" accept="image/*" hidden/>
+            <div id="inputTextHolder">
+                <div id="nameInput">Name :
+                    <input type="text" id="charaName">
+                </div>
+                <div id="scaleInput">Size :
+                    <input type="range" id="charaScale" class="slider" min="5" max="100" value="50" oninput="setScale(event)">
+                </div>
+            </div>
+            <div id="noticeHolder">
+                <a href="https://wiki.kirafan.moe">
+                    <img src="https://wiki.kirafan.moe/static/img/wiki_logo.f4d9b33.png" alt="">
+                </a>
+            </div>
+        </div>
+        <br>
+
+        <div id="elementSelector" class="selector"></div>
+        <div id="classSelector" class="selector"></div>
+        <div id="titleSelector" class="selector"></div>
+    </div>
+    </div>
+    <div id="imgHolder"></div>
+    <div id="pixiHolder"></div>
+    <font face="nameFont"></font>
+    <div id="convertToImg">Download as Image</div>
+    <img src="" alt="" id="appendImg">
+</body>
+<script src="./js/index.js"></script>
+
+</html>
