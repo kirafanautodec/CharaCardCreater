@@ -137,7 +137,7 @@ for (var i = 0; i < 6; i++) {
   $("#titleSelector").html(titleS);
   $("#title0").prop("checked", true);
   $("#titleFile").on("change", function () {
-	dialog_title.close();
+  dialog_title.close();
     $("input[name=title]").prop('checked', false);
     let thisFile = this.files[0];
     src = window.URL.createObjectURL(thisFile);
@@ -195,7 +195,6 @@ $(window).resize(function () {
 });
 
 $("#file").on("change", function () {
-  console.log($("#fontLoader").height());
   if (spriteUpload) {
     enableScale = true;
     let thisFile = this.files[0];
