@@ -22,9 +22,12 @@ const dict = [
 const ascii = {' ': 0.4, '!': 0.39, '"': 0.448, '#': 0.656, '$': 0.612, '%': 0.936, '&': 0.858, "'": 0.246, '(': 0.32, ')': 0.32, '*': 0.556, '+': 0.594, ',': 0.292, '-': 0.554, '.': 0.262, '/': 0.602, '0': 0.7, '1': 0.7, '2': 0.7, '3': 0.7, '4': 0.7, '5': 0.7, '6': 0.7, '7': 0.7, '8': 0.7, '9': 0.7, ':': 0.35, ';': 0.35, '<': 0.622, '=': 0.554, '>': 0.622, '?': 0.632, '@': 0.812, 'A': 0.788, 'B': 0.718, 'C': 0.676, 'D': 0.732, 'E': 0.65, 'F': 0.642, 'G': 0.698, 'H': 0.822, 'I': 0.296, 'J': 0.42, 'K': 0.752, 'L': 0.582, 'M': 0.868, 'N': 0.74, 'O': 0.836, 'P': 0.686, 'Q': 0.844, 'R': 0.68, 'S': 0.576, 'T': 0.586, 'U': 0.736, 'V': 0.744, 'W': 1.066, 'X': 0.796, 'Y': 0.78, 'Z': 0.686, '[': 0.388, '\\': 0.602, ']': 0.388, '^': 0.488, '_': 0.46, '`': 0.334, 'a': 0.626, 'b': 0.626, 'c': 0.552, 'd': 0.626, 'e': 0.602, 'f': 0.416, 'g': 0.628, 'h': 0.62, 'i': 0.314, 'j': 0.342, 'k': 0.6, 'l': 0.326, 'm': 0.824, 'n': 0.626, 'o': 0.62, 'p': 0.628, 'q': 0.628, 'r': 0.456, 's': 0.494, 't': 0.408, 'u': 0.612, 'v': 0.652, 'w': 0.902, 'x': 0.624, 'y': 0.586, 'z': 0.558, '{': 0.31, '|': 0.4, '}': 0.31, '~': 0.624, '\x7f': 1.0}
 let dragGroup = new PIXI.display.Group(0, true);
 const i10n = {
-  selectElement: ["属性選択", "选择属性", "Select Element"],
-  selectClass: ["クラス選択", "选择职业", "Select Class"],
-  selectTitle: ["作品選択", "选择作品", "Select Title"],
+  titleSettings: ["設定","设置","Settings"],
+  selectElement: ["属性", "属性", "Element"],
+  selectClass: ["クラス", "职业", "Class"],
+  selectTitle: ["作品", "作品", "Title"],
+  selectImage: ["画像", "图像", "Image"],
+  selectScale: ["画像サイズ", "缩放", "Scale"],
   emptyTitle: ["空", "空", "Empty"],
   wait: [
     "リソースの読み込みが完了してから選択してください",
@@ -117,7 +120,7 @@ for (var i = 0; i < 6; i++) {
             </label>
         </div>`.trim();
   }
-  titleS = trans("selectTitle") + titleS;
+  //titleS = trans("selectTitle") + titleS;
   titleS += `<div class="Radio">
             <label for="title${titleCounts}">
             <div style="width: 148px;height: 64px" id="tempTitle">${trans(
@@ -134,6 +137,7 @@ for (var i = 0; i < 6; i++) {
   $("#titleSelector").html(titleS);
   $("#title0").prop("checked", true);
   $("#titleFile").on("change", function () {
+	dialog_title.close();
     $("input[name=title]").prop('checked', false);
     let thisFile = this.files[0];
     src = window.URL.createObjectURL(thisFile);
@@ -154,11 +158,22 @@ for (var i = 0; i < 6; i++) {
     drawClass($(this).find('img')[0]);
   });
 
+  $("dialog_title").click(function(){
+    dialog_title.close();
+  });
   $("input[name=title]").on("change", function () {
     dialog_title.close();
     $("#titleSelectedImage").attr("src", $(this).prev().attr("src"));
     drawTitle($(this).prev()[0]);
   });
+  
+  //Set titles;
+  $("#titleElement").html(trans("selectElement"));
+  $("#titleClass").html(trans("selectClass"));
+  $("#titleTitle").html(trans("selectTitle"));
+  $("#titleImage").html(trans("selectImage"));
+  $("#titleScale").html(trans("selectScale"));
+  $("#titleSettings").html(trans("titleSettings"));
 })
 ;
 
