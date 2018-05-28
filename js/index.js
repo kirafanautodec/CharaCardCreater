@@ -10,6 +10,7 @@ let src,
   fontStyle,
   textContainer;
 let enableScale = false;
+let doubleStart = [0,0,0,0],doubleStartInfo = [0,[0,0]],currentScale = 1;
 const titleCounts = 24,
   fontsize = 600,
   radius = 800;
