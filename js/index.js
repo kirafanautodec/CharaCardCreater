@@ -40,6 +40,17 @@ const i10n = {
     "フォントの読み込みが完了してから選択してください",
     "字体文件尚未加载完成,请稍等",
     "Please wait for font loading"
+  ],
+  custom: ["カスタム", "", "Custom"],
+  size: [
+    "",
+    "",
+    "Images should have a ratio of 1:1, recommended size is 114x114"
+  ],
+  titleSize: [
+    "",
+    "",
+    "Titles have a recommended size of 186x56 or a similar ratio"
   ]
 };
 const languages = { j: 0, z: 1, e: 2 };
@@ -64,8 +75,23 @@ $("#niseForm").ready(() => {
         </div>`;
   }
   elS = trans("selectElement") + elS;
+  elS += `<div class="Custom">
+            <label for="elFile" id="elFileLabel">${trans("custom")}</label>
+            <input type="file" name="elFile" id="elFile" accept="image/*" hidden/>
+          </div>`.trim();
   $("#elementSelector").html(elS);
   $("#el0").prop("checked", true);
+  $("#elFile").on("change", function() {
+    $("input[name=element]").prop('checked', false);
+    let thisFile = this.files[0];
+    src = window.URL.createObjectURL(thisFile);
+    $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
+    let imgEl = document.getElementById("imgEl");
+    if(imgEl.naturalWidth != imgEl.naturalHeight) {
+      alert(trans("size"));
+    }
+    drawEl(imgEl);
+  });
 
   let classS = ``;
   for (var i = 0; i < 5; i++) {
@@ -77,8 +103,23 @@ $("#niseForm").ready(() => {
         </div>`.trim();
   }
   classS = trans("selectClass") + classS;
+  classS += `<div class="Custom">
+            <label for="classFile" id="classFileLabel">${trans("custom")}</label>
+            <input type="file" name="classFile" id="classFile" accept="image/*" hidden/>
+          </div>`.trim();
   $("#classSelector").html(classS);
   $("#class0").prop("checked", true);
+  $("#classFile").on("change", function() {
+    $("input[name=class]").prop('checked', false);
+    let thisFile = this.files[0];
+    src = window.URL.createObjectURL(thisFile);
+    $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
+    let imgEl = document.getElementById("imgEl");
+    if(imgEl.naturalWidth != imgEl.naturalHeight) {
+      alert(trans("size"));
+    }
+    drawClass(imgEl);
+  });
 
   let titleS = ``;
   for (var i = 0; i < titleCounts; i++) {
@@ -98,9 +139,24 @@ $("#niseForm").ready(() => {
                 <img src="./img/title/empty.png" alt="">
                 <input type="radio" value="${titleCounts}" name="title" id="title${titleCounts}">
             </label>
-        </div>`.trim();
+        </div>
+          <div class="Custom">
+            <label for="titleFile" id="titleFileLabel">${trans("custom")}</label>
+            <input type="file" name="titleFile" id="titleFile" accept="image/*" hidden/>
+          </div>`.trim();
   $("#titleSelector").html(titleS);
   $("#title0").prop("checked", true);
+  $("#titleFile").on("change", function() {
+    $("input[name=title]").prop('checked', false);
+    let thisFile = this.files[0];
+    src = window.URL.createObjectURL(thisFile);
+    $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
+    let imgEl = document.getElementById("imgEl");
+    if(imgEl.naturalWidth / imgEl.naturalHeight != 186/56) {
+      alert(trans("titleSize"));
+    }
+    drawTitle(imgEl);
+  });
 
   $("input[name=element]").on("change", function() {
     drawEl($(this).prev()[0]);
