@@ -131,6 +131,20 @@ input[type="file"] {
   width: 260px;
 }
 
+.Custom > label {
+  height: 50px;
+  width: 80px;
+  margin-top: 5px;
+  background-color: #ffd;
+  display: flex;
+  justify-content: center;
+  align-items: Center;
+  float: left;
+  border: 1px solid #784a3d;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
 #convertToImg {
   width: 75px;
   border: 1px solid #784a3d;
