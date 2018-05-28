@@ -41,7 +41,7 @@ const i10n = {
     "字体文件尚未加载完成,请稍等",
     "Please wait for font loading"
   ],
-  custom: ["カスタム", "", "Custom"]
+  custom: ["カスタム", "自定义图片", "Custom"]
 };
 const languages = { j: 0, z: 1, e: 2 };
 let lang = 0;
