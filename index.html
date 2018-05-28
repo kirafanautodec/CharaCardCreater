@@ -1,50 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>きらファンCard Maker - KiraFan Wiki</title>
+	<link rel="stylesheet" href="./css/material.brown-pink.min.css">
+	<link rel="stylesheet" href="./css/dialog-polyfill.css">
+	<script src="./libs/material.min.js"></script>
+	<script src="./libs/dialog-polyfill.js"></script>
     <script src="./libs/jquery.min.js"></script>
     <script src="./libs/pixi.min.js"></script>
     <script src="./libs/pixi-layers.js"></script>
     <link rel="stylesheet" href="./css/index.css">
     <base target="_blank">
+	<style>
+    #convertToImg {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
     <link rel="icon" href="https://kirafan.bangbang93.com/static/assets/texture/charauiresource/charaicon/charaicon_14032001.jpeg"
         type="image/x-icon">
 </head>
 
 <body>
-    <div id="choiceHolder">
-        <div id="niseForm">
-            <span id="fontLoader">FontLoader</span>
-            <label for="file" id="fileLabel">Select Image File</label>
-            <input type="file" name="file" id="file" accept="image/*" hidden/>
-            <div id="inputTextHolder">
-                <div id="nameInput">Name :
-                    <input type="text" id="charaName">
+	<dialog id="dialog_title" class="mdl-dialog" onclick="">
+		<h3 class="mdl-dialog__title">Select anime</h3>
+		<div class="mdl-dialog__content setting-content" id="titleSelector">
+			
+		</div>
+	</dialog>
+	
+    <div class="mdl-main mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				
+				<!-- Title -->
+				<span class="mdl-layout-title">きらファンCard Maker</span>
+				<!-- Add spacer, to align navigation to the right -->
+				<div class="mdl-layout-spacer"></div>
+				<!-- Navigation -->
+				<nav class="mdl-navigation titleicon">
+					<a class="mdl-navigation__link" href="https://wiki.kirafan.moe">
+						<img src="./img/wiki_logo.white.png" alt="">
+					</a>
+				</nav>
+			</div>
+		</header>
+		<main class="mdl-layout__content mdl-main-content">
+		<div class="mdl-grid ">
+			<div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--4-col">
+                <div class="chat_head">
+                    <h4 class="mdl-color-text--accent">Settings</h4>
+					
                 </div>
-                <div id="scaleInput">Size :
-                    <input type="range" id="charaScale" class="slider" min="5" max="100" value="50" oninput="setScale(event)">
+				<div class="chat_input">
+                    <div class="mdl-textfield mdl-js-textfield mdl-chat-input"  style="width:100%">
+                        <input class="mdl-textfield__input" type="text" id="charaName">
+                        <label class="mdl-textfield__label" for="charaName">Name</label>
+                    </div>
                 </div>
-            </div>
-            <div id="noticeHolder">
-                <a href="https://wiki.kirafan.moe">
-                    <img src="https://wiki.kirafan.moe/static/img/wiki_logo.f4d9b33.png" alt="">
-                </a>
-            </div>
-        </div>
-        <br>
+				<div id="loading">
+					<h5>Loading fonts</h5>
+					<div class="mdl-progress mdl-js-progress mdl-progress__indeterminate">
+				</div>	
+				</div>
+				<div>
+					<h5>Elemental</h5>
+					<div id="elementSelector"></div>
+				</div>
+				<div>
+					<h5>Class</h5>
+					<div id="classSelector"></div>
+				</div>
+				<div>
+					<h5>Anime</h5>
+					<div id="titleSelected" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+						<img id="titleSelectedImage" src="./img/title/0.png">
+					</div>
+				</div>
+				
+				<div>
+					<h5>Scale</h5>
+					<p style="width:100%">
+						<input class="mdl-slider mdl-js-slider" type="range" id="charaScale" min="5" max="100" value="50" step="1" oninput="setScale(event)">
+					</p>
+				</div>
 
-        <div id="elementSelector" class="selector"></div>
-        <div id="classSelector" class="selector"></div>
-        <div id="titleSelector" class="selector"></div>
-    </div>
-    </div>
+				<!-- Accent-colored raised button with ripple -->
+				<div>
+					<h5>Image</h5>
+					<input type="file" name="file" id="file" accept="image/*" hidden/>
+					<label class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" for="file">
+						Upload
+					</label>
+				</div>
+            </div>
+			<div id="niseForm">
+					<span id="fontLoader">FontLoader</span>
+			</div>
+			<div id="imgHolder"></div>
+			<div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--4-col" style="max-height:100%">
+				<div id="pixiHolder" style="max-width:100%></div>
+				<font face="nameFont"></font>
+			</div>
+		</div>
+	    </main>
+		<a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="convertToImg" download="YourKraraCard.png" >↓</a>
+	</div>
+	<!--
     <div id="imgHolder"></div>
     <div id="pixiHolder"></div>
     <font face="nameFont"></font>
     <div id="convertToImg">Download as Image</div>
-    <img src="" alt="" id="appendImg">
+    <img src="" alt="" id="appendImg">-->
 </body>
 <script src="./js/index.js"></script>
 
