@@ -398,6 +398,6 @@ $("#charaName").on("input", function() {
     let nnn = new nameString($(this).val());
     nnn.draw();
   } else {
-    alert(trans("font"));
+    alert(trans("waitFont"));
   }
 });
