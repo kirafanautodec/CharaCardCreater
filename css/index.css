@@ -13,7 +13,13 @@
   width: 0px;
 }
 
+#titleSelected {
+    padding: 5px 16px;
+}
 
+#elementSelector button, #classSelector button {
+    margin-right: 4px;
+}
 
 #niseForm {
   float: left;

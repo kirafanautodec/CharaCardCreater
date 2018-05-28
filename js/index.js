@@ -67,20 +67,19 @@ $("#titleSelected").click(function () {
 $("#niseForm").ready(() => {
   let elS = ``;
   for (var i = 0; i < 6; i++) {
-    elS += `
-<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab elemental" id="el${i}" data-elemental="${i}" >
-  <img src="./img/element/${i}.png" alt="" class="grayimg r_el">
-</button>`;
+    elS += `<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab elemental" id="el${i}" data-elemental="${i}" >
+              <img src="./img/element/${i}.png" alt="" class="grayimg r_el">
+            </button>`;
   }
-//elS = trans("selectElement") + elS;
+  //elS = trans("selectElement") + elS;
   elS += `<div class = "customdiv">
             <label class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab" for="elFile" id="elFileLabel"><i class="material-icons">+</i></label>
             <input type="file" name="elFile" id="elFile" accept="image/*" hidden/>
-          </div>`;
+          </div>`.trim();
   $("#elementSelector").html(elS);
   $("#el0").click();
   $("#elFile").on("change", function () {
-    $("input[name=element]").prop('checked', false);
+    $(".elemental").find('img').removeClass('hovorimg').addClass('grayimg');
     let thisFile = this.files[0];
     src = window.URL.createObjectURL(thisFile);
     $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
@@ -88,22 +87,21 @@ $("#niseForm").ready(() => {
     drawEl(imgEl);
   });
 
-let classS = ``;
-for (var i = 0; i < 6; i++) {
-    classS += `
-<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab _class" id="class${i}">
-  <img src="./img/class/${i}.png" alt="" class="grayimg r_el">
-</button>`.trim();
+  let classS = ``;
+  for (var i = 0; i < 6; i++) {
+    classS += `<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab _class" id="class${i}">
+                 <img src="./img/class/${i}.png" alt="" class="grayimg r_el">
+               </button>`;
   }
-//classS = trans("selectClass") + classS;
+  //classS = trans("selectClass") + classS;
   classS += `<div class = "customdiv">
-            <label class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab" for="classFile" id="classFileLabel"><i class="material-icons">+</i></label>
-            <input type="file" name="classFile" id="classFile" accept="image/*" hidden/>
-          </div>`.trim();
+               <label class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab" for="classFile" id="classFileLabel"><i class="material-icons">+</i></label>
+               <input type="file" name="classFile" id="classFile" accept="image/*" hidden/>
+             </div>`.trim();
   $("#classSelector").html(classS);
   $("#class0").click();
   $("#classFile").on("change", function () {
-    $("input[name=class]").prop('checked', false);
+    $("._class").find('img').removeClass('hovorimg').addClass('grayimg');
     let thisFile = this.files[0];
     src = window.URL.createObjectURL(thisFile);
     $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
