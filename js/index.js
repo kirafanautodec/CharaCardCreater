@@ -426,7 +426,9 @@ document.fonts.ready.then(function () {
 });
 
 $("#charaName").on("input", function () {
-  let nnn = new nameString($(this).val());
+  let name = $(this).val();
+  $("#convertToImg").prop("download", "Kirafan_CardMaker_" + name.toString() + ".png");
+  let nnn = new nameString(name);
   nnn.draw();
 });
 
