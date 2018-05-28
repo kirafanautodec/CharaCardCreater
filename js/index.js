@@ -135,7 +135,7 @@ $("#niseForm").ready(() => {
   $("#titleSelector").html(titleS);
   $("#title0").prop("checked", true);
   $("#titleFile").on("change", function () {
-	dialog_title.close();
+  dialog_title.close();
     $("input[name=title]").prop('checked', false);
     let thisFile = this.files[0];
     src = window.URL.createObjectURL(thisFile);
@@ -193,7 +193,6 @@ $(window).resize(function () {
 });
 
 $("#file").on("change", function () {
-  console.log($("#fontLoader").height());
   if (spriteUpload) {
     enableScale = true;
     let thisFile = this.files[0];
@@ -221,6 +220,10 @@ function setScale(event) {
 }
 
 function setup() {
+    pixi.view.addEventListener('touchmove', handleTouch);
+    pixi.view.addEventListener('touchend', handleTouch);
+    pixi.view.addEventListener('touchcancel', handleTouch);
+    pixi.view.addEventListener('touchstart', handleTouch);
   spriteCardFrame = new PIXI.Sprite(
     PIXI.loader.resources["./img/cardFrame.png"].texture
   );
@@ -425,3 +428,36 @@ $("#charaName").on("input", function () {
   let nnn = new nameString($(this).val());
   nnn.draw();
 });
+
+function handleTouch (e) {
+    e.preventDefault();
+    if (e.type == 'touchstart') {
+        if (e.touches.length == 2) {
+            let x0 = e.touches[0].pageX,
+                y0 = e.touches[0].pageY,
+                x1 = e.touches[1].pageX,
+                y1 = e.touches[1].pageY;
+            doubleStart = [x0, y0, x1, y1];
+            doubleStartInfo = [getDistance(...doubleStart), [(x0 + x1) / 2], (y0 + y1) / 2];
+        }
+    } else if (e.type == 'touchmove') {
+        if (e.touches.length == 2) {
+            let x0 = e.touches[0].pageX,
+                y0 = e.touches[0].pageY,
+                x1 = e.touches[1].pageX,
+                y1 = e.touches[1].pageY;
+            let thisPoint = [x0, y0, x1, y1];
+            let distance = getDistance(...thisPoint);
+            setUploadScale(currentScale * distance / doubleStartInfo[0]);
+        }
+    }
+    else if (e.type == 'touchcancel' || e.type == 'touchend') {
+        currentScale = spriteUpload.scale.x;
+    }
+}
+
+function getDistance(x0,y0,x1,y1){
+    let x = x0 - x1;
+    let y = y0 - y1;
+    return Math.sqrt(x*x + y*y)
+}
