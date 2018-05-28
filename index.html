@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>きらファンCard Maker - KiraFan Wiki</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="./css/material.brown-pink.min.css">
 	<link rel="stylesheet" href="./css/dialog-polyfill.css">
 	<script src="./libs/material.min.js"></script>
@@ -53,12 +54,12 @@
 		</header>
 		<main class="mdl-layout__content mdl-main-content">
 		<div class="mdl-grid ">
-			<div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--4-col">
-                <div class="chat_head">
-                    <h4 class="mdl-color-text--accent">Settings</h4>
-					
+		    <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+			<div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--4-col mdl-cell--8-col-phone">
+                <div>
+                    <h5 id="titleSettings" class="mdl-color-text--accent">Settings</h4>
                 </div>
-				<div class="chat_input">
+				<div>
                     <div class="mdl-textfield mdl-js-textfield mdl-chat-input"  style="width:100%">
                         <input class="mdl-textfield__input" type="text" id="charaName">
                         <label class="mdl-textfield__label" for="charaName">Name</label>
@@ -70,22 +71,22 @@
 				</div>	
 				</div>
 				<div>
-					<h5>Elemental</h5>
+					<h5 id="titleElement">Elemental</h5>
 					<div id="elementSelector"></div>
 				</div>
 				<div>
-					<h5>Class</h5>
+					<h5 id="titleClass">Class</h5>
 					<div id="classSelector"></div>
 				</div>
 				<div>
-					<h5>Anime</h5>
+					<h5 id="titleTitle">Title</h5>
 					<div id="titleSelected" class="mdl-button mdl-js-button mdl-js-ripple-effect">
 						<img id="titleSelectedImage" src="./img/title/0.png">
 					</div>
 				</div>
 				
 				<div>
-					<h5>Scale</h5>
+					<h5 id="titleScale">Scale</h5>
 					<p style="width:100%">
 						<input class="mdl-slider mdl-js-slider" type="range" id="charaScale" min="5" max="100" value="50" step="1" oninput="setScale(event)">
 					</p>
@@ -93,21 +94,22 @@
 
 				<!-- Accent-colored raised button with ripple -->
 				<div>
-					<h5>Image</h5>
+					<h5 id="titleImage">Image</h5>
 					<input type="file" name="file" id="file" accept="image/*" hidden/>
 					<label class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" for="file">
 						Upload
 					</label>
 				</div>
             </div>
-			<div id="niseForm">
-					<span id="fontLoader">FontLoader</span>
-			</div>
 			<div id="imgHolder"></div>
-			<div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--4-col" style="max-height:100%">
-				<div id="pixiHolder" style="max-width:100%></div>
+			<div class="setting-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--4-col mdl-cell--8-col-phone">
+				<div id="niseForm">
+				<span id="fontLoader">FontLoader</span>
+				</div>
+				<div id="pixiHolder" style="width:auto;height:auto"></div>
 				<font face="nameFont"></font>
 			</div>
+			<div class="mdl-cell--2-offset-desktop"></div>
 		</div>
 	    </main>
 		<a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="convertToImg" download="YourKraraCard.png" >↓</a>
