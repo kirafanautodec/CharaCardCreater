@@ -41,17 +41,7 @@ const i10n = {
     "字体文件尚未加载完成,请稍等",
     "Please wait for font loading"
   ],
-  custom: ["カスタム", "", "Custom"],
-  size: [
-    "",
-    "",
-    "Images should have a ratio of 1:1, recommended size is 114x114"
-  ],
-  titleSize: [
-    "",
-    "",
-    "Titles have a recommended size of 186x56 or a similar ratio"
-  ]
+  custom: ["カスタム", "", "Custom"]
 };
 const languages = { j: 0, z: 1, e: 2 };
 let lang = 0;
@@ -87,9 +77,6 @@ $("#niseForm").ready(() => {
     src = window.URL.createObjectURL(thisFile);
     $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
     let imgEl = document.getElementById("imgEl");
-    if(imgEl.naturalWidth != imgEl.naturalHeight) {
-      alert(trans("size"));
-    }
     drawEl(imgEl);
   });
 
@@ -115,9 +102,6 @@ $("#niseForm").ready(() => {
     src = window.URL.createObjectURL(thisFile);
     $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
     let imgEl = document.getElementById("imgEl");
-    if(imgEl.naturalWidth != imgEl.naturalHeight) {
-      alert(trans("size"));
-    }
     drawClass(imgEl);
   });
 
@@ -152,9 +136,6 @@ $("#niseForm").ready(() => {
     src = window.URL.createObjectURL(thisFile);
     $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
     let imgEl = document.getElementById("imgEl");
-    if(imgEl.naturalWidth / imgEl.naturalHeight != 186/56) {
-      alert(trans("titleSize"));
-    }
     drawTitle(imgEl);
   });
 
