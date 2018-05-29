@@ -131,6 +131,11 @@ img {
   overflow-x: hidden;
 }
 
+#titleBlank,
+#titleFileLabel {
+  font-size: 28px;
+}
+
 #choiceHolder {
   float: left;
 }
