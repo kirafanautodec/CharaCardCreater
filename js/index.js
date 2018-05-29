@@ -375,9 +375,9 @@ class nameString {
     this.text = string;
     this.textW = getAllTextWidth(this.text);
     if (this.textW > 8 * fontsize / 13) {
-      fontStyle.fontSize = 45 * Math.pow((8 * fontsize / 13) / this.textW, 0.3);
+      fontStyle.fontSize = 44 * Math.pow((8 * fontsize / 13) / this.textW, 0.9);
     } else {
-      fontStyle.fontSize = 45;
+      fontStyle.fontSize = 44;
     }
     this.textArr = [];
     let charCount = 0;
@@ -389,7 +389,7 @@ class nameString {
       let thisL = this.textW / 2 - thisW;
       let thisAngle = thisL / radius;
       if (this.textW > 6 * fontsize / 13) {
-        thisAngle = thisAngle * Math.sqrt((6 * fontsize / 13) / this.textW)
+        thisAngle = thisAngle * Math.pow((6 * fontsize / 13) / this.textW, 0.8);
       }
       let thisAngleRatio = [
         Math.sin(thisAngle),
