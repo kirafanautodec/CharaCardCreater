@@ -27,19 +27,22 @@
     <link rel="icon" href="https://kirafan.bangbang93.com/static/assets/texture/charauiresource/charaicon/charaicon_14032001.jpeg"
         type="image/x-icon">
 </head>
-
 <body>
 	<dialog id="dialog_title" class="mdl-dialog">
 		<h3 class="mdl-dialog__title">Select Title</h3>
-		<div class="mdl-dialog__content setting-content" id="titleSelector">
-			
+		<div class="mdl-dialog__content select-content" id="titleSelector">
+		</div>
+		<div class="mdl-dialog__actions">
+			<button type="button" class="mdl-button _title" id="titleBlank"></button>
+			<label class="mdl-button mdl-button--colored" for="titleFile" id="titleFileLabel"></label>
+            <input type="file" name="titleFile" id="titleFile" accept="image/*" hidden/>
+			</div>
 		</div>
 	</dialog>
 	
     <div class="mdl-main mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<header class="mdl-layout__header">
 			<div class="mdl-layout__header-row">
-				
 				<!-- Title -->
 				<span class="mdl-layout-title">きらファンCard Maker</span>
 				<!-- Add spacer, to align navigation to the right -->
@@ -91,8 +94,6 @@
 						<input class="mdl-slider mdl-js-slider" type="range" id="charaScale" min="5" max="100" value="50" step="0.01" oninput="setScale(event)">
 					</p>
 				</div>
-
-				<!-- Accent-colored raised button with ripple -->
 				<div>
 					<h5 id="titleImage">Image</h5>
 					<input type="file" name="file" id="file" accept="image/*" hidden/>
@@ -114,12 +115,6 @@
 	    </main>
 		<a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="convertToImg" download="Kirafan_CardMaker_.png" >↓</a>
 	</div>
-	<!--
-    <div id="imgHolder"></div>
-    <div id="pixiHolder"></div>
-    <font face="nameFont"></font>
-    <div id="convertToImg">Download as Image</div>
-    <img src="" alt="" id="appendImg">-->
 </body>
 <script src="./js/index.js"></script>
 

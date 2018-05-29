@@ -72,7 +72,6 @@ $("#niseForm").ready(() => {
               <img src="./img/element/${i}.png" alt="" class="grayimg r_el">
             </button>`;
   }
-  //elS = trans("selectElement") + elS;
   elS += `<div class = "customdiv">
             <label class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab" for="elFile" id="elFileLabel"><i class="material-icons">+</i></label>
             <input type="file" name="elFile" id="elFile" accept="image/*" hidden/>
@@ -94,7 +93,6 @@ $("#niseForm").ready(() => {
                  <img src="./img/class/${i}.png" alt="" class="grayimg r_el">
                </button>`;
   }
-  //classS = trans("selectClass") + classS;
   classS += `<div class = "customdiv">
                <label class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab" for="classFile" id="classFileLabel"><i class="material-icons">+</i></label>
                <input type="file" name="classFile" id="classFile" accept="image/*" hidden/>
@@ -112,35 +110,21 @@ $("#niseForm").ready(() => {
 
   let titleS = ``;
   for (var i = 0; i < titleCounts; i++) {
-    titleS += `<div class="Radio">
-            <label for="title${i}">
-                <img src="./img/title/${i}.png" alt="" class="r_t">
-                <input type="radio" value="${i}" name="title" id="title${i}" class="r_t">
-            </label>
+    titleS += `<div class="mdl-button mdl-js-button mdl-js-ripple-effect _title" id="title${i}">
+			<img src="./img/title/${i}.png" alt=""  class="grayimg">
         </div>`.trim();
   }
-  //titleS = trans("selectTitle") + titleS;
-  titleS += `<div class="Radio">
-            <label for="title${titleCounts}">
-            <div style="width: 148px;height: 64px" id="tempTitle">${trans(
-    "emptyTitle"
-  )}</div>
-                <img src="./img/title/empty.png" alt="">
-                <input type="radio" value="${titleCounts}" name="title" id="title${titleCounts}">
-            </label>
-        </div>
-          <div>
-            <label class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" for="titleFile" id="titleFileLabel">${trans("custom")}</label>
-            <input type="file" name="titleFile" id="titleFile" accept="image/*" hidden/>
-          </div>`.trim();
+  $("#titleBlank").html(trans("emptyTitle")+`<img src="./img/title/empty.png" alt="">`);
+  $("#titleFileLabel").html(trans("custom"));
   $("#titleSelector").html(titleS);
   $("#title0").prop("checked", true);
-  $("#titleFile").on("change", function () {
-  dialog_title.close();
+  $("#titleFile").on("change",function () {
+    dialog_title.close();
     $("input[name=title]").prop('checked', false);
     let thisFile = this.files[0];
     src = window.URL.createObjectURL(thisFile);
     $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
+	$("#titleSelectedImage").attr("src",src);
     let imgEl = document.getElementById("imgEl");
     drawTitle(imgEl);
   });
@@ -157,13 +141,16 @@ $("#niseForm").ready(() => {
     drawClass($(this).find('img')[0]);
   });
 
-  $("dialog_title").click(function(){
+  $("._title").click(function () {
+    $("._title > img").attr("class", "grayimg r_el");
+    $(this).find('img').attr("class", "hovorimg r_el");
+    $("#titleSelectedImage").attr("src", $(this).find('img').attr("src"));
+    drawTitle($(this).find('img')[0]);
     dialog_title.close();
   });
-  $("input[name=title]").on("change", function () {
+  
+  $("dialog_title").click(function(){
     dialog_title.close();
-    $("#titleSelectedImage").attr("src", $(this).prev().attr("src"));
-    drawTitle($(this).prev()[0]);
   });
   
   //Set titles;
@@ -188,10 +175,6 @@ $(() => {
   PIXI.loader.add("./img/cardFrame.png").load(setup);
 })
 ;
-
-$(window).resize(function () {
-  //pixi.renderer.view.resize(pixi.renderer.view.getParentDivWidth(), pixi.renderer.view.getParentDivHeight());
-});
 
 $("#file").on("change", function () {
   if (spriteUpload) {

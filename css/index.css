@@ -65,6 +65,14 @@ img{
             filter: grayscale(0%); 
 }
 
+.select-content {
+	justify-content: center;
+    border-radius: 2px;
+    padding: 16px 16px;
+    margin-bottom: 16px;
+    position: relative;
+}
+
 .setting-content {
     border-radius: 2px;
     padding: 16px 16px;
@@ -89,6 +97,9 @@ img{
 
 .titleicon img{width:60%;height:60%;}
 
+#dialog_title{
+	width: 75%;
+}
 #titleSelector {
   width: auto;
   height: 420px;
@@ -121,27 +132,11 @@ img{
 .customdiv {
 	display:inline-block;
 }
-.Custom > label {
-  height: 50px;
-  width: 80px;
-  margin-top: 5px;
-  background-color: #ffd;
-  display: flex;
-  justify-content: center;
-  align-items: Center;
-  float: left;
-  border: 1px solid #784a3d;
-  border-radius: 15px;
-  cursor: pointer;
-}
-
-
 #tempTitle {
-  width: 148px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: Center;
-  height: 64px;
 }
 
 #noticeHolder img {
