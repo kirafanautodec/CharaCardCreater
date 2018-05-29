@@ -110,7 +110,7 @@ $("#niseForm").ready(() => {
 
   let titleS = ``;
   for (var i = 0; i < titleCounts; i++) {
-    titleS += `<div class="mdl-button mdl-js-button mdl-js-ripple-effect _title" id="title${i}">
+    titleS += `<div class="mdl-button mdl-js-button mdl-js-ripple-effect _title titlediv" id="title${i}">
 			<img src="./img/title/${i}.png" alt=""  class="grayimg">
         </div>`.trim();
   }
