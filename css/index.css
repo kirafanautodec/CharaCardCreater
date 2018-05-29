@@ -66,6 +66,22 @@ img {
   filter: grayscale(0%);
 }
 
+.titlediv > .grayimg {
+  -webkit-filter: grayscale(0%);
+  -moz-filter: grayscale(0%);
+  -o-filter: grayscale(0%);
+  -ms-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+
+.titlediv > .hovorimg {
+  -webkit-filter: grayscale(0%);
+  -moz-filter: grayscale(0%);
+  -o-filter: grayscale(0%);
+  -ms-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+
 .select-content {
   justify-content: center;
   border-radius: 2px;
