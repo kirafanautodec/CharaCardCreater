@@ -17,7 +17,8 @@ const dict = [
   "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽゔゝゞゟ",
   "ぁぃぅぇぉゕゖっゃゅょゎ", "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポヴヷヸヹヺヽヾヿー々",
   "ァィゥェォヵヶッャュョヮㇰㇱㇲㇳㇴㇵㇶㇷㇸㇹㇺㇻㇼㇽㇾㇿ",
-  "・"
+  "・",
+  "　"
 ];
 const ascii = {' ': 0.4, '!': 0.39, '"': 0.448, '#': 0.656, '$': 0.612, '%': 0.936, '&': 0.858, "'": 0.246, '(': 0.32, ')': 0.32, '*': 0.556, '+': 0.594, ',': 0.292, '-': 0.554, '.': 0.262, '/': 0.602, '0': 0.7, '1': 0.7, '2': 0.7, '3': 0.7, '4': 0.7, '5': 0.7, '6': 0.7, '7': 0.7, '8': 0.7, '9': 0.7, ':': 0.35, ';': 0.35, '<': 0.622, '=': 0.554, '>': 0.622, '?': 0.632, '@': 0.812, 'A': 0.788, 'B': 0.718, 'C': 0.676, 'D': 0.732, 'E': 0.65, 'F': 0.642, 'G': 0.698, 'H': 0.822, 'I': 0.296, 'J': 0.42, 'K': 0.752, 'L': 0.582, 'M': 0.868, 'N': 0.74, 'O': 0.836, 'P': 0.686, 'Q': 0.844, 'R': 0.68, 'S': 0.576, 'T': 0.586, 'U': 0.736, 'V': 0.744, 'W': 1.066, 'X': 0.796, 'Y': 0.78, 'Z': 0.686, '[': 0.388, '\\': 0.602, ']': 0.388, '^': 0.488, '_': 0.46, '`': 0.334, 'a': 0.626, 'b': 0.626, 'c': 0.552, 'd': 0.626, 'e': 0.602, 'f': 0.416, 'g': 0.628, 'h': 0.62, 'i': 0.314, 'j': 0.342, 'k': 0.6, 'l': 0.326, 'm': 0.824, 'n': 0.626, 'o': 0.62, 'p': 0.628, 'q': 0.628, 'r': 0.456, 's': 0.494, 't': 0.408, 'u': 0.612, 'v': 0.652, 'w': 0.902, 'x': 0.624, 'y': 0.586, 'z': 0.558, '{': 0.31, '|': 0.4, '}': 0.31, '~': 0.624, '\x7f': 1.0}
 let dragGroup = new PIXI.display.Group(0, true);
@@ -356,6 +357,8 @@ function getTextWidth(s) {
     returnR = 0.7;
   } else if (dict[4].indexOf(s) !== -1) {
     returnR = 0.6;
+  } else if (dict[5].indexOf(s) !== -1) {
+    returnR = 0.4;
   } else {
     returnR = 1.0;
   }
@@ -375,7 +378,7 @@ class nameString {
     this.text = string;
     this.textW = getAllTextWidth(this.text);
     if (this.textW > 8 * fontsize / 13) {
-      fontStyle.fontSize = 44 * Math.pow((8 * fontsize / 13) / this.textW, 0.9);
+      fontStyle.fontSize = 44 * (8 * fontsize / 13) / this.textW;
     } else {
       fontStyle.fontSize = 44;
     }
@@ -388,8 +391,8 @@ class nameString {
       let thisW = hisW + getTextWidth(s) / 2;
       let thisL = this.textW / 2 - thisW;
       let thisAngle = thisL / radius;
-      if (this.textW > 6 * fontsize / 13) {
-        thisAngle = thisAngle * Math.pow((6 * fontsize / 13) / this.textW, 0.8);
+      if (this.textW > 7 * fontsize / 13) {
+        thisAngle = thisAngle * (7 * fontsize / 13) / this.textW;
       }
       let thisAngleRatio = [
         Math.sin(thisAngle),
