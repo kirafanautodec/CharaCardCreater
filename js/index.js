@@ -10,9 +10,8 @@ let src,
   fontStyle,
   textContainer;
 let enableScale = false;
-const titleCounts = 26,
-  fontsize = 600,
-  radius = 800;
+const titleCounts = 26;
+let fontsize = 600, radius = 800;
 let doubleStart = [0,0,0,0],doubleStartInfo = [0,[0,0]],currentScale = 1;
 const dict = [
   "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽゔゝゞゟ",
@@ -336,6 +335,7 @@ function onDragMove() {
 function setUploadScale(x) {
   spriteUpload.scale.x = x;
   spriteUpload.scale.y = x;
+  
 }
 
 $("#convertToImg").click(function () {
@@ -348,6 +348,8 @@ function getTextWidth(s) {
   let returnR;
   if (" " <= s && s <= "~") {
     returnR = ascii[s];
+  } else if ("\uFF61" <= s && s <= "\uFF9F") {
+    returnR = 0.5;
   } else if (dict[0].indexOf(s) !== -1 || dict[2].indexOf(s) !== -1) {
     returnR = 0.9;
   } else if (dict[1].indexOf(s) !== -1 || dict[3].indexOf(s) !== -1) {
@@ -372,6 +374,11 @@ class nameString {
   constructor(string = "") {
     this.text = string;
     this.textW = getAllTextWidth(this.text);
+    if (this.textW > 8 * fontsize / 13) {
+      fontStyle.fontSize = 45 * Math.pow((8 * fontsize / 13) / this.textW, 0.3);
+    } else {
+      fontStyle.fontSize = 45;
+    }
     this.textArr = [];
     let charCount = 0;
     let hisW = 0;
