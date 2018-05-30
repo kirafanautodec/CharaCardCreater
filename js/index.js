@@ -10,7 +10,7 @@ let src,
   fontStyle,
   textContainer;
 let enableScale = false;
-const titleCounts = 33;
+const titleCounts = [14, 6, 4, 11];
 let fontsize = 600, radius = 800;
 let doubleStart = [0,0,0,0],doubleStartInfo = [0,[0,0]],currentScale = 1;
 const dict = [
@@ -109,10 +109,13 @@ $("#niseForm").ready(() => {
   });
 
   let titleS = ``;
-  for (var i = 0; i < titleCounts; i++) {
-    titleS += `<div class="mdl-button mdl-js-button mdl-js-ripple-effect _title titlediv" id="title${i}">
-			<img src="./img/title/${i}.png" alt=""  class="grayimg">
+  for (var j=0; j<4; j++) {
+    if (j) titleS += "<hr>";
+    for (var i=0; i<titleCounts[j]; i++) {
+      titleS += `<div class="mdl-button mdl-js-button mdl-js-ripple-effect _title titlediv" id="title${i+j*100}">
+        <img src="./img/title/${i+j*100}.png" alt=""  class="grayimg">
         </div>`.trim();
+    }
   }
   $("#titleBlank").html(trans("emptyTitle")+`<img src="./img/title/empty.png" alt="">`);
   $("#titleFileLabel").html(trans("custom"));
