@@ -10,7 +10,7 @@ let src,
   fontStyle,
   textContainer;
 let enableScale = false;
-const titleCounts = [15, 6, 10, 12];
+const titleCounts = [15, 6, 10, 13];
 let fontsize = 600, radius = 800;
 let doubleStart = [0,0,0,0],doubleStartInfo = [0,[0,0]],currentScale = 1;
 const dict = [
