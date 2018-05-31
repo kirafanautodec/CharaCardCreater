@@ -247,7 +247,7 @@ function setup() {
   fontStyle.dropShadow = true;
   fontStyle.dropShadowAlpha = 0.3;
   fontStyle.dropShadowAngle = 3.1415 / 2;
-  fontStyle.dropShadowDistance = 10;
+  fontStyle.dropShadowDistance = 6;
 
   textContainer = new PIXI.Container();
   pixi.stage.addChild(textContainer);
