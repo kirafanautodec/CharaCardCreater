@@ -80,11 +80,8 @@ $("#niseForm").ready(() => {
   $("#el0").click();
   $("#elFile").on("change", function () {
     $(".elemental").find('img').removeClass('hovorimg').addClass('grayimg');
-    let thisFile = this.files[0];
-    src = window.URL.createObjectURL(thisFile);
-    $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
-    let imgEl = document.getElementById("imgEl");
-    drawEl(imgEl);
+    let src = window.URL.createObjectURL(this.files[0]);
+    drawEl(src);
   });
 
   let classS = ``;
@@ -102,10 +99,8 @@ $("#niseForm").ready(() => {
   $("#classFile").on("change", function () {
     $("._class").find('img').removeClass('hovorimg').addClass('grayimg');
     let thisFile = this.files[0];
-    src = window.URL.createObjectURL(thisFile);
-    $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
-    let imgEl = document.getElementById("imgEl");
-    drawClass(imgEl);
+    let src = window.URL.createObjectURL(this.files[0]);
+    drawClass(src);
   });
 
   let titleS = ``;
@@ -124,31 +119,29 @@ $("#niseForm").ready(() => {
   $("#titleFile").on("change",function () {
     dialog_title.close();
     $("input[name=title]").prop('checked', false);
-    let thisFile = this.files[0];
-    src = window.URL.createObjectURL(thisFile);
-    $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
-	$("#titleSelectedImage").attr("src",src);
-    let imgEl = document.getElementById("imgEl");
-    drawTitle(imgEl);
+    $("._title").find('img').removeClass('hovorimg').addClass('grayimg');
+    let src = window.URL.createObjectURL(this.files[0]);
+    $("#titleSelectedImage").attr("src",src);
+    drawTitle(src);
   });
 
   $(".elemental").click(function () {
     $(".elemental > img").attr("class", "grayimg r_el");
     $(this).find('img').attr("class", "hovorimg r_el");
-    drawEl($(this).find('img')[0]);
+    drawEl($(this).find('img')[0].src);
   });
 
   $("._class").click(function () {
     $("._class > img").attr("class", "grayimg r_el");
     $(this).find('img').attr("class", "hovorimg r_el");
-    drawClass($(this).find('img')[0]);
+    drawClass($(this).find('img')[0].src);
   });
 
   $("._title").click(function () {
     $("._title > img").attr("class", "grayimg r_el");
     $(this).find('img').attr("class", "hovorimg r_el");
     $("#titleSelectedImage").attr("src", $(this).find('img').attr("src"));
-    drawTitle($(this).find('img')[0]);
+    drawTitle($(this).find('img')[0].src);
     dialog_title.close();
   });
   
@@ -163,8 +156,7 @@ $("#niseForm").ready(() => {
   $("#titleImage").html(trans("selectImage"));
   $("#titleScale").html(trans("selectScale"));
   $("#titleSettings").html(trans("titleSettings"));
-})
-;
+});
 
 $(() => {
   pixi = new PIXI.Application({
@@ -176,19 +168,14 @@ $(() => {
   document.getElementById("pixiHolder").appendChild(pixi.view);
   $(pixi.view).css("width", "100%");
   PIXI.loader.add("./img/cardFrame.png").load(setup);
-})
-;
+});
 
 $("#file").on("change", function () {
   if (spriteUpload) {
     enableScale = true;
     let thisFile = this.files[0];
     src = window.URL.createObjectURL(thisFile);
-    $("#imgHolder").html('<img src="' + src + '" id="imgEl" hidden>');
-    let imgEl = document.getElementById("imgEl");
-    baseTexture = new PIXI.BaseTexture(imgEl);
-    textureUpload = new PIXI.Texture(baseTexture);
-    spriteUpload.texture = textureUpload;
+    spriteUpload.texture = new PIXI.Texture.fromImage(src);
     spriteUpload.position.set(spriteUpload.width / 2, spriteUpload.height / 2);
   } else {
     this.value = "";
@@ -253,13 +240,6 @@ function setup() {
   pixi.stage.addChild(elSprite);
   pixi.stage.addChild(titleSprite);
 
-  let a = $("#class0").prev()[0];
-  let b = $("#el0").prev()[0];
-  let c = $("#title0").prev()[0];
-  drawClass(a);
-  drawEl(b);
-  drawTitle(c);
-
   fontStyle = new PIXI.TextStyle();
   fontStyle.fontFamily = "nameFont";
   fontStyle.fill = "white";
@@ -267,28 +247,22 @@ function setup() {
   fontStyle.dropShadow = true;
   fontStyle.dropShadowAlpha = 0.3;
   fontStyle.dropShadowAngle = 3.1415 / 2;
-  fontStyledropShadowDistance = 10;
+  fontStyle.dropShadowDistance = 10;
 
   textContainer = new PIXI.Container();
   pixi.stage.addChild(textContainer);
 }
 
 function drawClass(image) {
-  let classBaseTexture = new PIXI.BaseTexture(image);
-  let classTexture = new PIXI.Texture(classBaseTexture);
-  classSprite.texture = classTexture;
+  classSprite.texture = new PIXI.Texture.fromImage(image);
 }
 
 function drawEl(image) {
-  let elBaseTexture = new PIXI.BaseTexture(image);
-  let elTexture = new PIXI.Texture(elBaseTexture);
-  elSprite.texture = elTexture;
+  elSprite.texture = new PIXI.Texture.fromImage(image);
 }
 
 function drawTitle(image) {
-  let elBaseTexture = new PIXI.BaseTexture(image);
-  let elTexture = new PIXI.Texture(elBaseTexture);
-  titleSprite.texture = elTexture;
+  titleSprite.texture = new PIXI.Texture.fromImage(image);
 }
 
 function onDragStart(event) {
