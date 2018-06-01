@@ -24,6 +24,7 @@ const ascii = {' ': 0.4, '!': 0.39, '"': 0.448, '#': 0.656, '$': 0.612, '%': 0.9
 let dragGroup = new PIXI.display.Group(0, true);
 const i10n = {
   titleSettings: ["設定","设置","Settings"],
+  selectFrame: ["枠", "卡框", "Frame"],
   selectElement: ["属性", "属性", "Element"],
   selectClass: ["クラス", "职业", "Class"],
   selectTitle: ["作品", "作品", "Title"],
@@ -66,6 +67,14 @@ $("#titleSelected").click(function () {
 });
 
 $("#niseForm").ready(() => {
+  let frS = ``;
+  for (var i = 3; i < 7; i++) {
+    frS += `<button class="mdl-button mdl-js-button mdl-button--colored _cardframe" id="fr${i}" data-frame="${i}" >
+              <img src="./img/frame/${i}.png" style="display:none;">${i}
+            </button>`;
+  }
+  $("#frameSelector").html(frS);
+  
   let elS = ``;
   for (var i = 0; i < 6; i++) {
     elS += `<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab elemental" id="el${i}" data-elemental="${i}" >
@@ -77,7 +86,6 @@ $("#niseForm").ready(() => {
             <input type="file" name="elFile" id="elFile" accept="image/*" hidden/>
           </div>`.trim();
   $("#elementSelector").html(elS);
-  $("#el0").click();
   $("#elFile").on("change", function () {
     $(".elemental").find('img').removeClass('hovorimg').addClass('grayimg');
     let src = window.URL.createObjectURL(this.files[0]);
@@ -85,7 +93,7 @@ $("#niseForm").ready(() => {
   });
 
   let classS = ``;
-  for (var i = 0; i < 6; i++) {
+  for (var i = 0; i < 7; i++) {
     classS += `<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--mini-fab _class" id="class${i}">
                  <img src="./img/class/${i}.png" alt="" class="grayimg r_el">
                </button>`;
@@ -95,7 +103,6 @@ $("#niseForm").ready(() => {
                <input type="file" name="classFile" id="classFile" accept="image/*" hidden/>
              </div>`.trim();
   $("#classSelector").html(classS);
-  $("#class0").click();
   $("#classFile").on("change", function () {
     $("._class").find('img').removeClass('hovorimg').addClass('grayimg');
     let thisFile = this.files[0];
@@ -124,6 +131,12 @@ $("#niseForm").ready(() => {
     $("#titleSelectedImage").attr("src",src);
     drawTitle(src);
   });
+  
+  $("._cardframe").click(function () {
+    drawFrame($(this).find('img')[0].src);
+    $("._cardframe").removeClass("mdl-button--raised");
+    $(this).addClass("mdl-button--raised");
+  });
 
   $(".elemental").click(function () {
     $(".elemental > img").attr("class", "grayimg r_el");
@@ -150,12 +163,16 @@ $("#niseForm").ready(() => {
   });
   
   //Set titles;
+  $("#titleFrame").html(trans("selectFrame"));
   $("#titleElement").html(trans("selectElement"));
   $("#titleClass").html(trans("selectClass"));
   $("#titleTitle").html(trans("selectTitle"));
   $("#titleImage").html(trans("selectImage"));
   $("#titleScale").html(trans("selectScale"));
   $("#titleSettings").html(trans("titleSettings"));
+  
+  $("#fr5").addClass("mdl-button--raised");
+  $("#title0").prop("checked", true);
 });
 
 $(() => {
@@ -251,6 +268,10 @@ function setup() {
 
   textContainer = new PIXI.Container();
   pixi.stage.addChild(textContainer);
+}
+
+function drawFrame(image) {
+  spriteCardFrame.texture = new PIXI.Texture.fromImage(image);
 }
 
 function drawClass(image) {
