@@ -184,7 +184,7 @@ $(() => {
   });
   document.getElementById("pixiHolder").appendChild(pixi.view);
   $(pixi.view).css("width", "100%");
-  PIXI.loader.add("./img/cardFrame.png").load(setup);
+  PIXI.loader.add("./img/frame/5.png").load(setup);
 });
 
 $("#file").on("change", function () {
@@ -216,7 +216,7 @@ function setup() {
     pixi.view.addEventListener('touchcancel', handleTouch);
     pixi.view.addEventListener('touchstart', handleTouch);
   spriteCardFrame = new PIXI.Sprite(
-    PIXI.loader.resources["./img/cardFrame.png"].texture
+    PIXI.loader.resources["./img/frame/5.png"].texture
   );
   spriteUpload = new PIXI.Sprite();
   spriteUpload.interactive = true;
