@@ -323,7 +323,9 @@ function setUploadScale(x) {
 $("#convertToImg").click(function () {
   pixi.renderer.render(pixi.stage);
   var imageData = pixi.view.toDataURL();
-  this.href = imageData;
+  displayImg(imageData);
+  // this.href = imageData;
+    // this.href = "http://www.baidu.com";
 });
 
 function getTextWidth(s) {
@@ -418,7 +420,7 @@ document.fonts.ready.then(function () {
 
 $("#charaName").on("input", function () {
   let name = $(this).val();
-  $("#convertToImg").prop("download", "Kirafan_CardMaker_" + name.toString() + ".png");
+  // $("#convertToImg").prop("download", "Kirafan_CardMaker_" + name.toString() + ".png");
   let nnn = new nameString(name);
   nnn.draw();
 });
@@ -455,3 +457,17 @@ function getDistance(x0,y0,x1,y1){
     let y = y0 - y1;
     return Math.sqrt(x*x + y*y)
 }
+
+function displayImg (base64) {
+    $("#upperDiv").html('')
+    $("#upperDiv").css('display','block');
+    downImg = document.createElement("img");
+    downImg.setAttribute("id","downloadImg")
+    downImg.setAttribute("src",base64)
+    $("#upperDiv")[0].appendChild(downImg)
+    console.log(downImg)
+}
+
+$("#upperDiv").click(function () {
+    $(this).css("display","none")
+})
