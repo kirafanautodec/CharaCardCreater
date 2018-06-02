@@ -181,5 +181,9 @@ img {
   display: none;
   cursor: pointer;
 }
-img downloadImg{
+#downloadLog{
+  height: 35px;
+  font-size: 35px;
+  color: white;
+  margin-top: 20px;
 }

@@ -465,7 +465,7 @@ function displayImg (base64) {
     downImg.setAttribute("id","downloadImg")
     downImg.setAttribute("src",base64)
     $("#upperDiv")[0].appendChild(downImg)
-    console.log(downImg)
+    $("#upperDiv").html($("#upperDiv").html() + `<div id="downloadLog">请保存上方图片</div>`)
 }
 
 $("#upperDiv").click(function () {
