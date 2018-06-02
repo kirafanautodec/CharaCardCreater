@@ -9,6 +9,7 @@ let src,
   titleSprite,
   fontStyle,
   textContainer;
+let charaName = '';
 let enableScale = false;
 const titleCounts = [15, 6, 10, 13];
 let fontsize = 600, radius = 800;
@@ -46,7 +47,8 @@ const i10n = {
     "字体文件尚未加载完成,请稍等",
     "Please wait for font loading"
   ],
-  custom: ["カスタム", "自定义图片", "Custom"]
+  custom: ["カスタム", "自定义图片", "Custom"],
+  toSave: ["長押し/右クリックして保存", "长按或右键保存", "Right click to save"]
 };
 const languages = {j: 0, z: 1, e: 2};
 let lang = 0;
@@ -419,9 +421,9 @@ document.fonts.ready.then(function () {
 });
 
 $("#charaName").on("input", function () {
-  let name = $(this).val();
+  charaName = $(this).val();
   // $("#convertToImg").prop("download", "Kirafan_CardMaker_" + name.toString() + ".png");
-  let nnn = new nameString(name);
+  let nnn = new nameString(charaName);
   nnn.draw();
 });
 
@@ -463,9 +465,10 @@ function displayImg (base64) {
     $("#upperDiv").css('display','block');
     downImg = document.createElement("img");
     downImg.setAttribute("id","downloadImg")
+    downImg.setAttribute("name","KirafanCardMaker_" + charaName.toString() + ".png")
     downImg.setAttribute("src",base64)
     $("#upperDiv")[0].appendChild(downImg)
-    $("#upperDiv").html($("#upperDiv").html() + `<div id="downloadLog">请保存上方图片</div>`)
+    $("#upperDiv").html($("#upperDiv").html() + `<div id="downloadLog">${trans("toSave")}</div>`)
 }
 
 $("#upperDiv").click(function () {
